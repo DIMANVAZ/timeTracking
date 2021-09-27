@@ -1,7 +1,7 @@
 let insertButton = document.getElementById('intervalInserter');
 let countButton = document.getElementById('counter')
 let tbody = document.querySelector('tbody');
-let oneIntervalHTML = `<tr><td><input type="time" ></td><td><input type="time" ></td></tr>`;
+let oneIntervalHTML = `<tr class="time"><td><input type="time" ></td><td><input type="time" ></td></tr>`;
 let totalTimeField = document.querySelector('span');
 
 document.addEventListener('keydown', function () {
@@ -32,16 +32,17 @@ function timeParser(stringTime){
 }
 
 function intervalDuration(time1,time2) {
-    if(time2.hours <= time1.hours && time2.mins < time1.mins) {
-        console.log(`меньше или равно! ДОбавили`)
+    if(time2.hours <= time1.hours && time2.mins <= time1.mins) {
+        //тонкий момент: если начало и конец совпадают, это считается за полные сутки!
         time2.hours += 24
     }
+        console.log(`time 1 hours = ${time1.hours}, time 2 hours = ${time2.hours}`)
     let intervalMinutes = (time2.hours - time1.hours) * 60 + (time2.mins - time1.mins);
     return intervalMinutes;
 }
 
 function totalBashHaHaHa (){
-    let allIntervals = document.querySelectorAll('tr') // массив строк
+    let allIntervals = document.querySelectorAll('.time') // массив строк
         //самая верхняя строка <tr> - последний элемент в массиве, самая нижняя - нулевой
         //let intervalsAmount = allIntervals.length
     let totalDuration = 0;
