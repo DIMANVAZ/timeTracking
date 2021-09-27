@@ -60,10 +60,15 @@ function totalBashHaHaHa (){
 }
 
 function missedFinder(){ //на случай незаполненного поля
+    let hasRed = false;
     document.querySelectorAll('input').forEach(input => {
         if (!input.value){
             input.style.backgroundColor = 'red'
             input.value = "00:00"
+            hasRed = true;
         } else {input.style.backgroundColor = 'white'}
     })
+    if (hasRed){
+        alert('Fill red fields / заполните красные поля')
+    }
 }
