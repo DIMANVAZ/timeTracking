@@ -13,11 +13,14 @@ function addInterval(){
 insertButton.onclick =() => {
     addInterval();
 }
+
 countButton.onclick = () => {
     let totalTime = totalTimeCounter(
         intervalDuration(
             timeParser(startTime.value),timeParser(endTime.value)))
     totalTimeField.innerText = `${totalTime.totalHours} hours, ${totalTime.remainedMinutes} mins`
+
+    console.log(totalBashHaHaHa())
 }
 
 
@@ -29,6 +32,9 @@ function timeParser(string){
 }
 
 function intervalDuration(time1,time2) {
+    if(time2.hours < time1.hours) {
+        time2.hours += 24
+    }
     let intervalMinutes = (time2.hours - time1.hours) * 60 + (time2.mins - time1.mins);
     return intervalMinutes;
 }
@@ -39,4 +45,16 @@ function totalTimeCounter(...minutes) {
     totalTime.totalHours = Math.floor(totalMinutes / 60);
     totalTime.remainedMinutes = totalMinutes % 60;
     return totalTime;
+}
+
+function totalBashHaHaHa (){
+    let show;
+    let allIntervals = document.querySelectorAll('tr')
+    let intervalsAmount = allIntervals.length
+    allIntervals.forEach(interval =>{
+        let twoTimeFields = interval.querySelectorAll('input')
+        show = twoTimeFields[0].value
+    })
+
+    return show
 }
