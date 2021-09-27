@@ -1,11 +1,23 @@
-/* Стили таблицы (IKSWEB) */
-table.iksweb{text-decoration: none;border-collapse:collapse;width:50%;text-align:left;}
-table.iksweb th{font-weight:normal;font-size:16px; color:#ffffff;background-color:#348f00;}
-table.iksweb td{font-size:14px;color:#000000;}
-table.iksweb td,table.iksweb th{white-space:pre-wrap;padding:12px 20px;line-height:14px;vertical-align: middle;border: 1px solid #348f00;}
-table.iksweb tr:hover{background-color:#f9fafb}
-table.iksweb tr:hover td{color:#354251;cursor:default;}
+*{
+    margin: 0;
+    padding: 0;
+}
 
-#input{
-    margin: 20px;
+button{
+    padding:10px;
+    margin-left:calc(1% + 2px);
+    margin-top:calc(10px);
+}
+
+table{
+    margin-left:1%;
+}
+
+h3{
+    margin-left:1%;
+    padding:10px;
+}
+
+p{
+    margin-left:calc(1% + 2px);
 }
