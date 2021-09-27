@@ -24,3 +24,11 @@ h3{
 p{
     margin-left:calc(1% + 2px);
 }
+
+img{
+    height:50px;
+    width:50px;
+    border-radius:50px;
+    margin-left:calc(1% + 2px);
+    margin-top:calc(10px);
+}
