@@ -11,10 +11,19 @@ input{
 }
 
 button{
-    padding:10px;
-    margin-left:calc(1% + 2px);
-    margin-top:calc(10px);
-    margin-bottom:calc(5px);
+    padding:7px;
+    margin: 10px 5px 5px calc(1% + 2px);
+    font-size:1rem;
+    border: 2px solid dodgerblue;
+    border-radius: 5px;
+}
+
+button:hover{
+    box-shadow: 0 0 4px 2px dodgerblue;
+}
+
+button:active{
+    box-shadow: inset 0 0 4px 2px dodgerblue;
 }
 
 table{
@@ -40,26 +49,17 @@ img{
     margin-top:calc(10px);
 }
 
+img:hover{
+    box-shadow: 0 0 4px 2px dodgerblue;
+}
+
 #description{
     margin-top:10px;
     width: 30%
 }
 
-button{
-    border: 2px solid dodgerblue;
-    border-radius: 5px;
-}
-
-button:hover{
-    box-shadow: 0 0 4px 2px dodgerblue;
-}
-
-button:active{
-    box-shadow: inset 0 0 4px 2px dodgerblue;
-}
-
-img:hover{
-    box-shadow: 0 0 4px 2px dodgerblue;
+#hintOfEnter{
+    font-size:0.9rem;
 }
 
 @media screen and (max-width:480px) {

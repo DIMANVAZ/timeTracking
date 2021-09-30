@@ -3,6 +3,8 @@ let countButton = document.getElementById('counter')
 let tbody = document.querySelector('tbody');
 let oneIntervalHTML = `<tr class="time"><td><input type="time" ></td><td><input type="time" ></td></tr>`;
 let totalTimeField = document.querySelector('span');
+let saveButton = document.getElementById('saveButton');
+let saveAs = document.getElementById('saveAs')
 
 document.addEventListener('keydown', function () {
     if(event.key === "Enter"){
@@ -19,9 +21,14 @@ insertButton.onclick =() => {
 }
 
 countButton.onclick = () => {
-    missedFinder()
-    let totalTime = totalBashHaHaHa()
-    totalTimeField.innerText = `Часов: ${totalTime.totalHours}, минут: ${totalTime.remainedMinutes}`
+    missedFinder();
+    let totalTime = totalBashHaHaHa();
+    totalTimeField.innerText = `Часов: ${totalTime.totalHours}, минут: ${totalTime.remainedMinutes}`;
+}
+
+saveButton.onclick =() => {
+    console.log(saveAs.value)
+    localStorage.setItem(`${saveAs.value}`,JSON.stringify(totalTimeField.innerText))
 }
 
 function timeParser(stringTime){
@@ -74,7 +81,7 @@ function totalBashHaHaHa (){
 function missedFinder(){ //на случай незаполненного поля
     let hasRed = false;
     document.querySelectorAll('input').forEach(input => {
-        if (!input.value){
+        if (!input.value && input.id !== "saveAS"){
             input.style.backgroundColor = 'red'
             input.value = "00:00"
             hasRed = true;
