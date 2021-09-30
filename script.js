@@ -21,7 +21,7 @@ insertButton.onclick =() => {
 countButton.onclick = () => {
     missedFinder()
     let totalTime = totalBashHaHaHa()
-    totalTimeField.innerText = `${totalTime.totalHours} hours, ${totalTime.remainedMinutes} mins`
+    totalTimeField.innerText = `Часов: ${totalTime.totalHours}, минут: ${totalTime.remainedMinutes}`
 }
 
 function timeParser(stringTime){
@@ -35,13 +35,18 @@ function intervalDuration(time1,time2) {
     //случаи 1,2: часы2 >= часы1, минуты2 >= минуты1 - всё норм
     //случай 3: часы2 = часы1, минуты2 < минуты1 -ОШИБКА- добавить 24ч
     //случай 4: часы2 < часы1, минуты2 <= минуты1 - ОШИБКА - добавить 24 ч
+    //случай 5: часы2 < часы1, минуты2 > минуты1 - ОШИБКА - добавить 24 ч
     if(time2.hours === time1.hours && time2.mins < time1.mins) {
         time2.hours += 24
     }
 
-    if(time2.hours < time1.hours && time2.mins <= time1.mins) {
+    if(time2.hours < time1.hours /*&& time2.mins <= time1.mins*/) {
         time2.hours += 24
     }
+
+    // if(time2.hours < time1.hours && time2.mins <= time1.mins) {
+    //     time2.hours += 24
+    // }
 
     let intervalMinutes = (time2.hours - time1.hours) * 60 + (time2.mins - time1.mins);
     return intervalMinutes;

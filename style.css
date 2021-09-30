@@ -4,6 +4,12 @@
     font-family: Helvetica, sans-serif;
 }
 
+input{
+    margin-right: 10px;
+    padding: 5px;
+    border-radius:5px;
+}
+
 button{
     padding:10px;
     margin-left:calc(1% + 2px);
@@ -28,7 +34,26 @@ p{
 img{
     height:50px;
     width:50px;
+    border: 2px solid dodgerblue;
     border-radius:50px;
     margin-left:calc(1% + 2px);
     margin-top:calc(10px);
+}
+
+#description{
+    margin-top:10px;
+    width: 30%
+}
+
+button{
+    border: 2px solid dodgerblue;
+    border-radius: 5px;
+}
+
+button:hover{
+    box-shadow: 0 0 4px 2px dodgerblue;
+}
+
+button:active{
+    box-shadow: inset 0 0 4px 2px dodgerblue;
 }

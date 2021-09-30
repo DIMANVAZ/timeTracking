@@ -7,16 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <button id="intervalInserter">Add (добавить)</button>
-    <p>(...or press Enter to)</p>
-    <h3>Total time (общее время): <br>
+    <p id="description">Средство хронометража: фиксирует интервалы времени (начало, конец) и суммирует их.
+        Применяется для оценки времени, потраченного на что-либо.
+    </p>
+
+    <h3>Общее время: <br>
         <span style="color:dodgerblue;font-size:120%">--</span></h3>
     <div id="container">
         <table id="table">
             <tbody>
                 <tr>
-                    <td>Started</td>
-                    <td>Finished</td>
+                    <td>Начало</td>
+                    <td>Конец</td>
                 </tr>
                 <tr class="time">
                     <td><input type="time"></td>
@@ -24,9 +26,11 @@
                 </tr>
             </tbody>
         </table>
-        <button id="counter">Count (посчитать)</button>
+        <button id="intervalInserter">Добавить интервал</button>
+        <p>(...либо нажмите Enter)</p>
+        <button id="counter">Посчитать всё время</button>
         <br>
-        <img src="./logo.png" alt="logo">
+        <a href="https://github.com/DIMANVAZ" target="_blank"><img src="./logo.png" alt="logo" id="SRlogo"></a>
     </div>
 <script src="script.js"></script>
 </body>
