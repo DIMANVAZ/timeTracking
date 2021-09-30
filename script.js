@@ -81,6 +81,6 @@ function missedFinder(){ //на случай незаполненного пол
         } else {input.style.backgroundColor = 'white'}
     })
     if (hasRed){
-        alert('Fill red fields / заполните красные поля')
+        alert('Заполните красные поля')
     }
 }
