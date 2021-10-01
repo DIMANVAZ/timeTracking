@@ -79,7 +79,7 @@ function totalBashHaHaHa (){
 function missedFinder(){ //на случай незаполненного поля
     let hasRed = false;
     document.querySelectorAll('input').forEach(input => {
-        if (!input.value && input.id !== "saveAS"){
+        if (!input.value && input.id !== "saveAs"){
             input.style.backgroundColor = 'red'
             input.value = "00:00"
             hasRed = true;
