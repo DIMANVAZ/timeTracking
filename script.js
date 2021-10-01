@@ -6,6 +6,8 @@ let totalTimeField = document.querySelector('span');
 let saveButton = document.getElementById('saveButton');
 let saveAs = document.getElementById('saveAs')
 
+
+
 document.addEventListener('keydown', function () {
     if(event.key === "Enter"){
         addInterval()
@@ -50,10 +52,6 @@ function intervalDuration(time1,time2) {
     if(time2.hours < time1.hours /*&& time2.mins <= time1.mins*/) {
         time2.hours += 24
     }
-
-    // if(time2.hours < time1.hours && time2.mins <= time1.mins) {
-    //     time2.hours += 24
-    // }
 
     let intervalMinutes = (time2.hours - time1.hours) * 60 + (time2.mins - time1.mins);
     return intervalMinutes;
