@@ -67,3 +67,7 @@ img:hover{
         width: 80%
     }
 }
+
+.start{
+    border: 4px solid green;
+}
