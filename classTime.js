@@ -39,7 +39,7 @@ export class Time {
 
    startTime = {};
    endTime = {};
-   i = 1;
+   rows = 0;
    sumOfAll = {allHours:0, allMinutes:0};
 
    memento(timeStamp){
@@ -47,7 +47,7 @@ export class Time {
        timeStamp.minutes = this.getTime().minutes;
    }
 
-   makeTableRow(i){
+   makeTableRow(rows){
         // просто сокращения
         let sum = this.sumHoursAndMins(this.startTime, this.endTime);
         let stT = this.startTime;
@@ -57,19 +57,20 @@ export class Time {
         this.sumOfAll.minutes += sum.minutesSum;
 
     return `<tr>
-                <td>${i} </td>
+                <td>${rows} </td>
                 <td>${stT.hours}: ${stT.minutes} - ${edT.hours}: ${edT.minutes}</td>
                 <td>${sum.hoursSum} ч, ${sum.minutesSum} мин </td>
             </tr>`
    }
 
-   makeFinalRow(){
-       return `<tr>
-                    <td>Всего</td><td>${this.sumOfAll.allHours} ч, ${this.sumOfAll.allMinutes} мин</td>
-                </tr>`
-}
+    makeFinalRow(){
+       return `<td>Всего</td><td>${this.sumOfAll.allHours} ч, ${this.sumOfAll.allMinutes} мин</td>`
+    }
 
 }
+// почему не считается общее время? Его будем и показывать, и записывать
+// как вставлять динамические строки в середину
+// как перевернуть вставляемый список?
 
 // time1 = {hours:23, minutes:8};
 // time2 = {hours:5, minutes:36};

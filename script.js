@@ -9,6 +9,8 @@ const clock = document.getElementById('clock');
 const date = document.getElementById('date');
 const notifier = document.getElementById('recordNotifier');
 const timeTable = document.getElementById('timeTable');
+const sumRow = document.getElementById('sumRow');
+const tableHeader = document.getElementById('tableHeader');
 
 //часы:минуты в данную секунду времени, автоматически обновляется через setInterval
 setInterval(() => {
@@ -24,20 +26,25 @@ clock.onclick = () => {
         time.memento(time.startTime);
         isRecording = true;
 
-        notifier.classList.remove('hidden');
+        notifier.classList.toggle('hidden');
         clock.classList.toggle('blink');
 
     } else {
         time.memento(time.endTime);
         isRecording = false;
 
-        notifier.classList.add('hidden');
+        notifier.classList.toggle('hidden');
         clock.classList.toggle('blink');
 
-        timeTable.insertAdjacentHTML('beforeend', time.makeTableRow(time.i))
-        time.i++;
-        timeTable.insertAdjacentHTML('beforeend', time.makeFinalRow())
-       //alert(Object.values(time.sumHoursAndMins(startTime, endTime)))
+        timeTable.insertAdjacentHTML('afterbegin', time.makeTableRow(++time.rows))
+            if(time.rows >=1) {
+                timeTable.classList.remove('hidden');
+            }
+
+            if(time.rows >=2) {
+                sumRow.innerHTML =  time.makeFinalRow();
+                sumRow.classList.remove('hidden');
+            }
     }
 }
 
