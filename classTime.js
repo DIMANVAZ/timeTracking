@@ -17,22 +17,31 @@ export class Time {
                 ${this.addZero(this.getTime().seconds)}`
     }
 
-    minutesDuration(startMins, endMins){    //разница между минутами
-       if(endMins >= startMins){
-           return endMins-startMins;
-       } else return (endMins+60)-startMins;
-    }
-
-    hoursDuration(startHours, endHours){    //разница между часами
-       if(endHours >= startHours){
-           return endHours-startHours;
-       } else return (endHours+24)-startHours;
-    }
-
     sumHoursAndMins(startTime, endTime){    //разница между нач и кон временем в форматах {hours:0, minutes:0}
-       let hoursSum = this.hoursDuration(startTime.hours, endTime.hours);
-       let minutesSum = this.minutesDuration(startTime.minutes, endTime.minutes);
-       return {hoursSum, minutesSum};
+        //случаи I: ч2 >= ч1 && м2 >= м1 тогда обычное вычитание "вторые минус первые"
+        //случаи II: ч2 > ч1 && м2 < м1 тогда ч2-ч1-1, м2-м1+60
+        //случаи III: ч2 <= ч1 && м2 < м1 тогда ч2-ч1+24-1, м2-м1+60
+        //случаи IV: ч2 < ч1 && м2 >= м1 тогда ч2-ч1+24, м2-м1
+
+        let hoursSum;
+        let minutesSum;
+        let [h1,m1,h2,m2] = [startTime.hours,startTime.minutes,endTime.hours,endTime.minutes];
+
+        if(h2 >= h1 && m2 >= m1){
+            hoursSum = h2-h2;
+            minutesSum = m2-m1;
+        } else if (h2 > h1 && m2 < m1){
+            hoursSum = h2-h1-1;
+            minutesSum = m2-m1+60;
+        } else if (h2 <= h1 && m2 < m1){
+            hoursSum = h2-h1+24-1;
+            minutesSum = m2-m1+60;
+        } else if (h2 < h1 && m2 >= m1){
+            hoursSum = h2-h1+24;
+            minutesSum = m2-m1;
+        } else throw new Error('непредусмотренная комбинация в функции sumHoursAndMins')
+
+        return {hoursSum, minutesSum};
     }
 
     addZero(number){    //добавляет 0 перед цифрой<10 и возвращает string!
@@ -80,8 +89,15 @@ export class Time {
             sumAll.hours += record.totalDuration.hoursSum;
             sumAll.minutes += record.totalDuration.minutesSum;
         })
-        console.log(sumAll)
         return sumAll
     }
 }
-// почему не считается общее время? Его будем и показывать, и записывать
+
+/*
+let time = new Time();
+console.log(
+    time.sumHoursAndMins(
+        {hours: 23, minutes:0},
+        {hours: 23, minutes: 0}
+    )
+);*/
