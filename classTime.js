@@ -28,13 +28,14 @@ export class Time {
    sumHoursAndMins(startTime = {hours:0, minutes:0}, endTime = {hours:0, minutes:0}){
        let hoursSum = this.hoursDuration(startTime.hours, endTime.hours);
        let minutesSum = this.minutesDuration(startTime.minutes, endTime.minutes);
+            console.log(`команда sumHoursAndMins сообщает: hoursSum = ${hoursSum}, minutesSum = ${minutesSum}`);
        return {hoursSum, minutesSum};
    }
 
    addZero(number){
        if(number < 10){
-           return [`0${number}`,number]; // [0] = string!
-       } else return [`${number}`,number];
+           return [`0${number}`]; // [0] = string!
+       } else return [`${number}`];
    }
 
    startTime = {};
@@ -53,14 +54,10 @@ export class Time {
         let stT = this.startTime;
         let edT = this.endTime;
 
-        this.sumOfAll.allHours += sum.hoursSum;
-        this.sumOfAll.minutes += sum.minutesSum;
-
-    return `<tr>
-                <td>${rows} </td>
-                <td>${stT.hours}: ${stT.minutes} - ${edT.hours}: ${edT.minutes}</td>
-                <td>${sum.hoursSum} ч, ${sum.minutesSum} мин </td>
-            </tr>`
+    return `<td>${rows} </td>
+            <td>${stT.hours}: ${this.addZero(stT.minutes)} - ${edT.hours}: ${this.addZero(edT.minutes)}</td>
+            <td>${sum.hoursSum} ч, ${sum.minutesSum} мин </td>
+            `
    }
 
     makeFinalRow(){
@@ -69,11 +66,3 @@ export class Time {
 
 }
 // почему не считается общее время? Его будем и показывать, и записывать
-// как вставлять динамические строки в середину
-// как перевернуть вставляемый список?
-
-// time1 = {hours:23, minutes:8};
-// time2 = {hours:5, minutes:36};
-//
-// let time = new Time();
-// console.log(time.sumHoursAndMins(time1, time2))

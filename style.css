@@ -5,6 +5,61 @@ body {
     --main-blue: DeepSkyBlue;
     --main-orange: #F54021;
 }
+#clock{
+    display: inline-block;
+    padding: 5px 15px;
+    font-size:22px;
+    border-radius:17px;
+}
+.solid{
+    border: 4px solid var(--main-blue);
+}
+.blink{
+    animation: borderStyle 5s linear infinite;
+}
+#date{
+    font-size:22px;
+}
+.hidden{
+    /*display: none;*/
+    visibility: hidden;
+}
+
+@keyframes borderStyle {
+    0%{
+        border: 4px solid var(--main-orange);
+        box-shadow: 0 0 2px 2px var(--main-orange);
+    }
+    25% {
+        border: 4px solid yellow;
+        box-shadow: 0 0 2px 2px yellow;
+    }
+    50%{
+        border: 4px solid var(--main-blue);
+        box-shadow: 0 0 2px 2px var(--main-blue);
+    }
+    75%{
+        border: 4px solid yellow;
+        box-shadow: 0 0 2px 2px yellow;
+    }
+    100%{
+        border: 4px solid var(--main-orange);
+        box-shadow: 0 0 2px 2px var(--main-orange);
+    }
+}
+
+table
+{
+    border-collapse: collapse;
+    border: 1px solid var(--main-blue);
+}
+
+td{
+    padding: 5px;
+    border: 1px solid var(--main-blue);
+}
+
+/*стили для переключателей и появляющихся под их управлением блоков*/
 #switch-btn-1{
     margin: 10px 0 30px;
 }
@@ -56,44 +111,4 @@ body {
     background: var(--main-orange);
     font-size: 40px;
     text-align: center;
-}
-#clock{
-    display: inline-block;
-    padding: 5px 15px;
-    font-size:22px;
-    border-radius:17px;
-}
-.solid{
-    border: 4px solid var(--main-blue);
-}
-.blink{
-    /*border: 4px dotted var(--main-blue);*/
-    animation: borderStyle 3s linear infinite;
-}
-#date{
-    font-size:22px;
-}
-.hidden{
-    /*display: none;*/
-    visibility: hidden;
-}
-
-@keyframes borderStyle {
-    33% {
-        border: 4px dotted var(--main-blue);
-    }
-    66%{
-        border: 4px dashed var(--main-blue);
-    }
-}
-
-table
-{
-    border-collapse: collapse;
-    border: 1px solid var(--main-blue);
-}
-
-td{
-    padding: 5px;
-    border: 1px solid var(--main-blue);
 }
