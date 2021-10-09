@@ -1,7 +1,7 @@
 import {Time} from "./classTime.js";
 import {LocalStorageMgr} from "./classSaveAndLoad.js";
 
-let time = new Time();
+let timeInstance = new Time();
 let LSM = new LocalStorageMgr();
 
 const app = document.getElementById('app');
@@ -12,11 +12,11 @@ const timeTable = document.getElementById('timeTable');
 const sumRow = document.getElementById('sumRow');
 
 //дата в верху страницы
-date.innerHTML = time.getTime().fullDateTimeString.split(',')[0]
+date.innerHTML = timeInstance.getTime().fullDateTimeString.split(',')[0]
 
 //часы:минуты в данную секунду времени, автоматически обновляется
 setInterval(() => {
-    clock.innerHTML = time.hms();
+    clock.innerHTML = timeInstance.hmsString();
 },1000)
 
 let isRecording = false;
@@ -25,27 +25,27 @@ let isRecording = false;
 clock.onclick = () => {
 
     if (!isRecording){
-        time.memento(time.startTime);   //записали время
+        timeInstance.memento('start');   //записали время
         isRecording = true;
         notifier.classList.toggle('hidden');
         clock.classList.toggle('blink');
 
     } else {
-        time.memento(time.endTime);     //записали время
+        timeInstance.memento('end');     //записали время
         isRecording = false;
         notifier.classList.toggle('hidden');
         clock.classList.toggle('blink');
 
         let nextRow = document.createElement('tr'); //вставляем строку со временем в таблицу
-        nextRow.innerHTML = time.makeTableRow(++time.rows);
+        nextRow.innerHTML = timeInstance.makeTableRow(++timeInstance.rowId);
         sumRow.parentNode.insertBefore(nextRow, sumRow);
 
-        if(time.rows >=1) {
+        if(timeInstance.rowId >=1) {
             timeTable.classList.remove('hidden');  //показываем таблицу, в т.ч. шапку
         }
 
-        if(time.rows >=2) {
-            sumRow.innerHTML =  time.makeFinalRow();     //показываем строку итогового подсчёта
+        if(timeInstance.rowId >=2) {
+            sumRow.innerHTML =  timeInstance.makeFinalRow();     //показываем строку итогового подсчёта
             sumRow.classList.remove('hidden');
         }
     }
