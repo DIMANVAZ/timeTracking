@@ -6,38 +6,29 @@
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body>
-    <p id="description">Средство хронометража: фиксирует интервалы времени (начало, конец) и суммирует их.
-        Применяется для оценки времени, потраченного на что-либо.
-    </p>
+    <body>
+        <div id="app">
+            <div id="date"></div>
+            <div id="clock" class="solid" >**: **: **</div>
+            <div id="recordNotifier" class="hidden">идёт отсчёт времени</div>
+            <table id="timeTable"></table>
+        </div>
+<!--        <div style="text-align:center;">-->
 
-    <h3>Общее время: <br>
-        <span style="color:dodgerblue;font-size:120%">--</span></h3>
-    <div id="container">
-        <table id="table">
-            <tbody>
-                <tr>
-                    <td>Начало</td>
-                    <td>Конец</td>
-                </tr>
-                <tr class="time">
-                    <td><input type="time"></td>
-                    <td><input type="time"></td>
-                </tr>
-            </tbody>
-        </table>
-        <button id="intervalInserter">Добавить интервал</button>
-        <p id="hintOfEnter"><i>(...либо нажмите Enter)</i></p>
-        <button id="counter">Посчитать всё время</button>
-        <br>
-        <button id="saveButton">Cохранить как</button>
-        <input type="text" id="saveAs" placeholder="введите имя">
-        <br>
-        <a href="startStop.html">Перейти на замер</a>
-        <br>
-        <a href="https://github.com/DIMANVAZ" target="_blank"><img src="./logo.png" alt="logo" id="SRlogo"></a>
-    </div>
-<script src="script.js"></script>
-</body>
+<!--            <div class="switch-btn" id="switch-btn-1"></div>-->
+
+<!--            <div id="block-1" >-->
+<!--                1 BLOCK-->
+<!--            </div>-->
+
+<!--            <div id="block-2" class="bl-hide">-->
+<!--                2 BLOCK-->
+<!--            </div>-->
+
+<!--        </div>-->
+    <!--<a href="https://github.com/DIMANVAZ" target="_blank"><img src="./logo.png" alt="logo" id="SRlogo"></a>-->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script type="module" src="script.js"></script>
+    </body>
 </html>
 

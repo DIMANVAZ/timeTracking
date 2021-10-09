@@ -1,91 +1,64 @@
-let insertButton = document.getElementById('intervalInserter');
-let countButton = document.getElementById('counter')
-let tbody = document.querySelector('tbody');
-let oneIntervalHTML = `<tr class="time"><td><input type="time" ></td><td><input type="time" ></td></tr>`;
-let totalTimeField = document.querySelector('span');
-let saveButton = document.getElementById('saveButton');
-let saveAs = document.getElementById('saveAs')
+import {Time} from "./classTime.js";
+import {LocalStorageMgr} from "./classSaveAndLoad.js";
 
+let time = new Time();
+let LSM = new LocalStorageMgr();
 
+const app = document.getElementById('app');
+const clock = document.getElementById('clock');
+const date = document.getElementById('date');
+const notifier = document.getElementById('recordNotifier');
+const timeTable = document.getElementById('timeTable');
 
-document.addEventListener('keydown', function () {
-    if(event.key === "Enter"){
-        addInterval()
-    }
-})
+//часы:минуты в данную секунду времени, автоматически обновляется через setInterval
+setInterval(() => {
+    clock.innerHTML = time.hms();
+},1000)
 
-function addInterval(){
-    tbody.insertAdjacentHTML('beforeEnd',oneIntervalHTML);
-}
+date.innerHTML = time.getTime().fullDateTimeString.split(',')[0]
 
-insertButton.onclick =() => {
-    addInterval();
-}
+let isRecording = false;
+clock.onclick = () => {
 
-countButton.onclick = () => {
-    missedFinder();
-    let totalTime = totalBashHaHaHa();
-    totalTimeField.innerText = `Часов: ${totalTime.totalHours}, минут: ${totalTime.remainedMinutes}`;
-}
+    if(!isRecording){
+        time.memento(time.startTime);
+        isRecording = true;
 
-saveButton.onclick =() => {
-    console.log(saveAs.value)
-    localStorage.setItem(`${saveAs.value}`,JSON.stringify(totalTimeField.innerText))
-}
+        notifier.classList.remove('hidden');
+        clock.classList.toggle('blink');
 
-function timeParser(stringTime){
-    let hoursMins = {};
-    hoursMins.hours = parseInt(stringTime.split(":")[0]);
-    hoursMins.mins = parseInt(stringTime.split(":")[1]);
-    return hoursMins;
-}
+    } else {
+        time.memento(time.endTime);
+        isRecording = false;
 
-function intervalDuration(time1,time2) {
-    //случаи 1,2: часы2 >= часы1, минуты2 >= минуты1 - всё норм
-    //случай 3: часы2 = часы1, минуты2 < минуты1 -ОШИБКА- добавить 24ч
-    //случай 4: часы2 < часы1, минуты2 <= минуты1 - ОШИБКА - добавить 24 ч
-    //случай 5: часы2 < часы1, минуты2 > минуты1 - ОШИБКА - добавить 24 ч
-    if(time2.hours === time1.hours && time2.mins < time1.mins) {
-        time2.hours += 24
-    }
+        notifier.classList.add('hidden');
+        clock.classList.toggle('blink');
 
-    if(time2.hours < time1.hours /*&& time2.mins <= time1.mins*/) {
-        time2.hours += 24
-    }
-
-    let intervalMinutes = (time2.hours - time1.hours) * 60 + (time2.mins - time1.mins);
-    return intervalMinutes;
-}
-
-function totalBashHaHaHa (){
-    let allIntervals = document.querySelectorAll('.time') // массив строк
-        //самая верхняя строка <tr> - последний элемент в массиве, самая нижняя - нулевой
-        //let intervalsAmount = allIntervals.length
-    let totalDuration = 0;
-    allIntervals.forEach(interval =>{
-        let twoTimeFields = interval.querySelectorAll('input') //массив из 2-т тайм-инпутов строки
-
-        totalDuration += intervalDuration(
-            timeParser(twoTimeFields[0].value),
-            timeParser(twoTimeFields[1].value)
-        )
-    })
-    let totalTime = {};
-        totalTime.totalHours = Math.floor(totalDuration / 60);
-        totalTime.remainedMinutes = totalDuration % 60;
-    return totalTime;
-}
-
-function missedFinder(){ //на случай незаполненного поля
-    let hasRed = false;
-    document.querySelectorAll('input').forEach(input => {
-        if (!input.value && input.id !== "saveAs"){
-            input.style.backgroundColor = 'red'
-            input.value = "00:00"
-            hasRed = true;
-        } else {input.style.backgroundColor = 'white'}
-    })
-    if (hasRed){
-        alert('Заполните красные поля')
+        timeTable.insertAdjacentHTML('beforeend', time.makeTableRow(time.i))
+        time.i++;
+       //alert(Object.values(time.sumHoursAndMins(startTime, endTime)))
     }
 }
+
+
+document.addEventListener("DOMContentLoaded", () => {
+});
+
+$(function () {
+    $('#switch-btn-1').click(function () {
+        $(this).toggleClass('switch-on');
+        if ($(this).hasClass('switch-on')) {
+            $(this).trigger('on.switch');
+        } else {
+            $(this).trigger('off.switch');
+        }
+    });
+    $('#switch-btn-1').on('on.switch', function () {
+        $('#block-1').addClass('bl-hide');
+        $('#block-2').removeClass('bl-hide');
+    });
+    $('.switch-btn').on('off.switch', function () {
+        $('#block-1').removeClass('bl-hide');
+        $('#block-2').addClass('bl-hide');
+    });
+});
