@@ -40,6 +40,7 @@ export class Time {
    startTime = {};
    endTime = {};
    i = 1;
+   sumOfAll = {allHours:0, allMinutes:0};
 
    memento(timeStamp){
        timeStamp.hours = this.getTime().hours;
@@ -52,15 +53,21 @@ export class Time {
         let stT = this.startTime;
         let edT = this.endTime;
 
+        this.sumOfAll.allHours += sum.hoursSum;
+        this.sumOfAll.minutes += sum.minutesSum;
+
     return `<tr>
-            <td>Интервал ${i} </td>
-            <td>${stT.hours}: ${stT.minutes} - ${edT.hours}: ${edT.minutes}</td>
-                <td>Длина: 
-                        ${sum.hoursSum} ч,
-                        ${sum.minutesSum} мин  
-                </td>
+                <td>${i} </td>
+                <td>${stT.hours}: ${stT.minutes} - ${edT.hours}: ${edT.minutes}</td>
+                <td>${sum.hoursSum} ч, ${sum.minutesSum} мин </td>
             </tr>`
    }
+
+   makeFinalRow(){
+       return `<tr>
+                    <td>Всего</td><td>${this.sumOfAll.allHours} ч, ${this.sumOfAll.allMinutes} мин</td>
+                </tr>`
+}
 
 }
 

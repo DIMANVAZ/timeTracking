@@ -36,6 +36,7 @@ clock.onclick = () => {
 
         timeTable.insertAdjacentHTML('beforeend', time.makeTableRow(time.i))
         time.i++;
+        timeTable.insertAdjacentHTML('beforeend', time.makeFinalRow())
        //alert(Object.values(time.sumHoursAndMins(startTime, endTime)))
     }
 }
