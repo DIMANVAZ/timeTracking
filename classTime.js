@@ -78,16 +78,23 @@ export class Time {
     }
 
     makeFinalRow(){    //заполнить подвал таблицы финальными данными
+       let sumOfAllHours = this.sumAllRows(this.summary).hours;
+       let sumOfAllMinutes = this.sumAllRows(this.summary).minutes;
+
+       this.summary.push({summa:{sumOfAllHours,sumOfAllMinutes}}); //отдельный элемент для суммы
+
        return `<td>Всего</td>
-               <td>${this.sumAllRows(this.summary).hours} ч, 
-                   ${this.sumAllRows(this.summary).minutes} мин</td>`
+               <td>${sumOfAllHours} ч, 
+                   ${sumOfAllMinutes} мин</td>`
     }
 
-    sumAllRows(summaryArray){
+    sumAllRows(summaryArray){   //посчитать сумму часов и минут всех строк массива
         let sumAll = {hours: 0, minutes: 0};
         summaryArray.forEach(record => {
-            sumAll.hours += record.totalDuration.hoursSum;
-            sumAll.minutes += record.totalDuration.minutesSum;
+            if(record.totalDuration){ //чтобы избежать попадания на элемент с полем summa
+                sumAll.hours += record.totalDuration.hoursSum;
+                sumAll.minutes += record.totalDuration.minutesSum;
+            }
         })
         return sumAll
     }

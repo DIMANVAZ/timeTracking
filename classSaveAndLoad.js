@@ -1,19 +1,13 @@
 //класс для сохранения,загрузки и очистки (из LocalStorage)
 export class LocalStorageMgr {
 
-    saveToLS(result,uniqueName) {
+    saveToLS(uniqueName,result) {
     //проверим ключ на уникальность
     let nameIsUnique;
     let keys = Object.keys(localStorage);
-        keys.forEach(key => {
-            uniqueName !== key ?
-            nameIsUnique = true : nameIsUnique = false;
-        });
-        if(nameIsUnique){
-            localStorage.setItem(uniqueName,JSON.stringify(result));
-        }else {
-            alert('Такое имя уже есть, придумайте новое');
-        }
+
+    localStorage.setItem(uniqueName,JSON.stringify(result));
+
     }
 
     loadFromLS(providedName){
@@ -27,5 +21,9 @@ export class LocalStorageMgr {
 
     clearLS(){
         localStorage.clear();
+    }
+
+    saveInterface(){
+        return ``
     }
 }

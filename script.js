@@ -10,6 +10,9 @@ const date = document.getElementById('date');
 const notifier = document.getElementById('recordNotifier');
 const timeTable = document.getElementById('timeTable');
 const sumRow = document.getElementById('sumRow');
+const saveBlock = document.getElementById('saveBlock');
+const submitSave = document.getElementById('submitSave');
+const nameField = document.getElementById('nameField');
 
 //дата в верху страницы
 date.innerHTML = timeInstance.getTime().fullDateTimeString.split(',')[0]
@@ -42,6 +45,7 @@ clock.onclick = () => {
 
         if(timeInstance.rowId >=1) {
             timeTable.classList.remove('hidden');  //показываем таблицу, в т.ч. шапку
+            saveBlock.classList.remove('hidden'); //показываем интерфейс сохранения
         }
 
         if(timeInstance.rowId >=2) {
@@ -49,6 +53,11 @@ clock.onclick = () => {
             sumRow.classList.remove('hidden');
         }
     }
+}
+
+//нажатие на div "сохранить"
+submitSave.onclick = () => {
+    LSM.saveToLS(nameField.value, timeInstance.summary)
 }
 
 document.addEventListener("DOMContentLoaded", () => {
