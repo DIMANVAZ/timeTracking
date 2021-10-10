@@ -57,7 +57,9 @@ clock.onclick = () => {
 
 //нажатие на div "сохранить"
 submitSave.onclick = () => {
-    LSM.saveToLS(nameField.value, timeInstance.summary)
+    let status = LSM.saveToLS(nameField.value, timeInstance.summary);
+    alert(status);
+    nameField.value = ''
 }
 
 document.addEventListener("DOMContentLoaded", () => {

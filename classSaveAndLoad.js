@@ -3,11 +3,24 @@ export class LocalStorageMgr {
 
     saveToLS(uniqueName,result) {
     //проверим ключ на уникальность
-    let nameIsUnique;
+    let ableToSave;
     let keys = Object.keys(localStorage);
 
-    localStorage.setItem(uniqueName,JSON.stringify(result));
+        if(uniqueName && !keys.length){
+            ableToSave = true;
+        } else if (uniqueName && keys.length) {
+            ableToSave = true;
+            keys.forEach(key =>{
+                if(key === uniqueName){ //если такое имя уже есть
+                    ableToSave = false;
+                }
+            })
+        }
 
+        if(ableToSave){
+            localStorage.setItem(uniqueName,JSON.stringify(result));
+            return 'Сохранено'
+        } else return 'Ошибка: такое имя уже есть'
     }
 
     loadFromLS(providedName){
