@@ -5,6 +5,9 @@ body {
     --main-blue: DeepSkyBlue;
     --main-orange: #F54021;
 }
+*{
+    margin:5px;
+}
 #clock{
     display: inline-block;
     padding: 5px 15px;
@@ -21,8 +24,13 @@ body {
     font-size:22px;
 }
 .hidden{
-    /*display: none;*/
     visibility: hidden;
+}
+#saveBlock,#showRecords{
+    display: inline-block;
+    border: 1px solid var(--main-blue);
+    padding:5px;
+    font-size:20px;
 }
 
 @keyframes borderStyle {

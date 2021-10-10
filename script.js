@@ -13,6 +13,8 @@ const sumRow = document.getElementById('sumRow');
 const saveBlock = document.getElementById('saveBlock');
 const submitSave = document.getElementById('submitSave');
 const nameField = document.getElementById('nameField');
+const recordsTable = document.getElementById('recordsTable');
+const showHideButton = document.getElementById('showHideButton');
 
 //дата в верху страницы
 date.innerHTML = timeInstance.getTime().fullDateTimeString.split(',')[0]
@@ -60,6 +62,12 @@ submitSave.onclick = () => {
     let status = LSM.saveToLS(nameField.value, timeInstance.summary);
     alert(status);
     nameField.value = ''
+}
+
+//повесить проверку пустоты\полноты LS на любое событие?
+
+showHideButton.onclick =() => {
+    console.log(LSM.showRecords());
 }
 
 document.addEventListener("DOMContentLoaded", () => {

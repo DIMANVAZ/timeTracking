@@ -20,7 +20,7 @@ export class LocalStorageMgr {
         if(ableToSave){
             localStorage.setItem(uniqueName,JSON.stringify(result));
             return 'Сохранено'
-        } else return 'Ошибка: такое имя уже есть'
+        } else return 'Ошибка: имя пустое или уже есть'
     }
 
     loadFromLS(providedName){
@@ -32,11 +32,21 @@ export class LocalStorageMgr {
         }
     }
 
+    showRecords(){
+        let keys = [];
+        let records = [];
+        for (let i = 0; i < localStorage.length; i++) {
+            keys.push(localStorage.key(i));
+        }
+        keys.forEach(key=>{
+            records.push(JSON.parse(localStorage.getItem(key)))
+        })
+        // return keys;
+        return records;
+    }
+
     clearLS(){
         localStorage.clear();
     }
 
-    saveInterface(){
-        return ``
-    }
 }
