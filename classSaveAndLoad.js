@@ -32,7 +32,7 @@ export class LocalStorageMgr {
         }
     }
 
-    showRecords(){
+    getRecords(){
         let keys = [];
         let records = [];
         for (let i = 0; i < localStorage.length; i++) {
@@ -41,8 +41,16 @@ export class LocalStorageMgr {
         keys.forEach(key=>{
             records.push(JSON.parse(localStorage.getItem(key)))
         })
-        // return keys;
-        return records;
+        return keys;
+        //return records;
+    }
+
+    showRecords(){
+        let tr = document.createElement('tr');
+        this.getRecords().forEach(key=>{
+            tr.insertAdjacentHTML('beforeend', `<td>${key}</td>`)
+        })
+        return tr;
     }
 
     clearLS(){

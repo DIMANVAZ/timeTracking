@@ -67,7 +67,9 @@ submitSave.onclick = () => {
 //повесить проверку пустоты\полноты LS на любое событие?
 
 showHideButton.onclick =() => {
-    console.log(LSM.showRecords());
+    console.log(LSM.getRecords());
+    recordsTable.classList.remove('hidden');
+    recordsTable.append(LSM.showRecords());
 }
 
 document.addEventListener("DOMContentLoaded", () => {
