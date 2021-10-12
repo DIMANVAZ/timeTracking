@@ -18,11 +18,12 @@ export class LocalStorageMgr {
         }
 
         if(ableToSave){
-            localStorage.setItem(uniqueName,JSON.stringify(result));
+            localStorage.setItem(`tt-${uniqueName}`,JSON.stringify(result));
             return 'Сохранено'
         } else return 'Ошибка: имя пустое или уже есть'
     }
 
+    //загрузить из локального хранилища по имени
     loadFromLS(providedName){
         try{
             return JSON.parse(localStorage.getItem(providedName));
@@ -32,6 +33,8 @@ export class LocalStorageMgr {
         }
     }
 
+    //получить все записи из ЛС, которые относятся к нашей программе (не вперемешку с чужими)
+    // вставить проверку, чтобы key начинался на tt-
     getRecords(){
         let keys = [];
         let records = [];
@@ -45,11 +48,13 @@ export class LocalStorageMgr {
         //return records;
     }
 
+    // показать все записи но! удалить у имён префикс tt-  вынести в отдельную функцию проверку на наличие tt и удаление для вывода?? или не надо
     showRecords(){
-        let tr = document.createElement('tr');
+        let tr = `<tr>`
         this.getRecords().forEach(key=>{
-            tr.insertAdjacentHTML('beforeend', `<td>${key}</td>`)
-        })
+            tr +=`<td>${key}</td>`
+        });
+        tr += `</tr>`
         return tr;
     }
 

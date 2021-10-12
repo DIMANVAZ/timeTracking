@@ -65,11 +65,13 @@ submitSave.onclick = () => {
 }
 
 //повесить проверку пустоты\полноты LS на любое событие?
+//подвал с "загрузить" должен появиться, только когда в ЛС есть записи
 
 showHideButton.onclick =() => {
-    console.log(LSM.getRecords());
+        console.log(LSM.getRecords());
     recordsTable.classList.remove('hidden');
-    recordsTable.append(LSM.showRecords());
+    recordsTable.innerHTML = `${LSM.showRecords()}`;
+        console.log(LSM.showRecords())
 }
 
 document.addEventListener("DOMContentLoaded", () => {
