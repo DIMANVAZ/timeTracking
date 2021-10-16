@@ -1,6 +1,18 @@
 //класс для сохранения,загрузки и очистки (из LocalStorage)
 export class LocalStorageMgr {
 
+    wasViewed(){ //проверяем, новый юзер или нет
+        let wasViewed = false;
+        Object.keys(localStorage).forEach(key => {
+            if (key === "wasViewed-tt"){
+                wasViewed = true
+            }
+        })
+        if (!wasViewed)
+            {localStorage.setItem("wasViewed-tt", "true")};
+        return wasViewed;
+    }
+
     saveToLS(uniqueName,result) {
     //проверим ключ на уникальность
     let ableToSave;
@@ -39,12 +51,14 @@ export class LocalStorageMgr {
         let keys = [];
         let records = [];
         for (let i = 0; i < localStorage.length; i++) {
-            keys.push(localStorage.key(i));
+            if(localStorage.key(i).slice(0,2) === "tt") { //проверка, что ключ "наш", то есть не из другой проги
+                keys.push(localStorage.key(i));
+            }
         }
-        keys.forEach(key=>{
-            records.push(JSON.parse(localStorage.getItem(key)))
-        })
-        return keys;
+            keys.forEach(key=>{
+                records.push(JSON.parse(localStorage.getItem(key)));
+            })
+            return keys;
         //return records;
     }
 
