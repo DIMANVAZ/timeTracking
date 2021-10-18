@@ -62,7 +62,8 @@ clock.onclick = () => {
 submitSave.onclick = () => {
     let status = LSM.saveToLS(nameField.value, timeInstance.summary);
     alert(status);                                   //
-    recordsTable.innerHTML = `${LSM.showRecords()}`; //чтобы список обновился, если мы сохранили
+    //recordsTable.innerHTML = `${LSM.showRecords()}`; //чтобы список обновился, если мы сохранили
+    recordsFlexDiv.innerHTML = `${LSM.showRecords()}`; //чтобы список обновился, если мы сохранили
     nameField.value = ''
 }
 
