@@ -14,6 +14,7 @@ const saveBlock = document.getElementById('saveBlock');
 const submitSave = document.getElementById('submitSave');
 const nameField = document.getElementById('nameField');
 const recordsTable = document.getElementById('recordsTable');
+const recordsFlexDiv = document.getElementById('recordsFlexDiv');
 const showHideButton = document.getElementById('showHideButton');
 
 //дата в верху страницы
@@ -69,8 +70,11 @@ submitSave.onclick = () => {
 //подвал с "загрузить" должен появиться, только когда в ЛС есть записи
 
 showHideButton.onclick =() => { // показать\скрыть должны обновляться при изменении сохранённого - удалении или добавлении
-    recordsTable.classList.toggle('hidden');
-    recordsTable.innerHTML = `${LSM.showRecords()}`;
+    //recordsTable.classList.toggle('hidden'); -------это всё таблицы
+    //recordsTable.innerHTML = `${LSM.showRecords()}`;
+
+    recordsFlexDiv.classList.toggle('hidden');
+    recordsFlexDiv.innerHTML = `${LSM.showRecords()}`;
 }
 
 document.addEventListener("DOMContentLoaded", () => {

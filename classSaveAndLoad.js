@@ -75,12 +75,18 @@ export class LocalStorageMgr {
     // показать все записи но!
     // выводить их в виде flex ?
     showRecords(){
-        let tr = `<tr>`
+        // let tr = `<tr>` ------- это для таблицы
+        // this.getRecords().forEach(key=>{
+        //     tr +=`<td>${this.delTT(key)}</td>`
+        // });
+        // tr += `</tr>`
+        // return tr;
+
+        let allDivs = ``
         this.getRecords().forEach(key=>{
-            tr +=`<td>${this.delTT(key)}</td>`
+            allDivs +=`<div class="flexCell">${this.delTT(key)}</div>`
         });
-        tr += `</tr>`
-        return tr;
+        return allDivs;
     }
 
     clearAllRecords(){
