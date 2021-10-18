@@ -1,6 +1,16 @@
 //класс для сохранения,загрузки и очистки (из LocalStorage)
 export class LocalStorageMgr {
 
+    addTT(string){
+        return `tt-`+string;
+    }
+
+    delTT(string){
+        if(string.indexOf('tt-') === 0)
+        {return string.slice(3)}
+        else return `No tt-`
+    }
+
     wasViewed(){ //проверяем, новый юзер или нет
         let wasViewed = false;
         Object.keys(localStorage).forEach(key => {
@@ -30,7 +40,7 @@ export class LocalStorageMgr {
         }
 
         if(ableToSave){
-            localStorage.setItem(`tt-${uniqueName}`,JSON.stringify(result));
+            localStorage.setItem(this.addTT(uniqueName),JSON.stringify(result));
             return 'Сохранено'
         } else return 'Ошибка: имя пустое или уже есть'
     }
@@ -51,7 +61,7 @@ export class LocalStorageMgr {
         let keys = [];
         let records = [];
         for (let i = 0; i < localStorage.length; i++) {
-            if(localStorage.key(i).slice(0,2) === "tt") { //проверка, что ключ "наш", то есть не из другой проги
+            if(localStorage.key(i).slice(0,3) === "tt-") { //проверка, что ключ "наш", то есть не из другой проги
                 keys.push(localStorage.key(i));
             }
         }
@@ -62,18 +72,23 @@ export class LocalStorageMgr {
         //return records;
     }
 
-    // показать все записи но! удалить у имён префикс tt-  вынести в отдельную функцию проверку на наличие tt и удаление для вывода?? или не надо
+    // показать все записи но!
+    // выводить их в виде flex ?
     showRecords(){
         let tr = `<tr>`
         this.getRecords().forEach(key=>{
-            tr +=`<td>${key}</td>`
+            tr +=`<td>${this.delTT(key)}</td>`
         });
         tr += `</tr>`
         return tr;
     }
 
-    clearLS(){
+    clearAllRecords(){
         localStorage.clear();
+    }
+
+    clearThisRecord(key){
+        localStorage.removeItem(key);
     }
 
 }

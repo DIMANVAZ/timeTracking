@@ -60,23 +60,23 @@ clock.onclick = () => {
 //нажатие на div "сохранить"
 submitSave.onclick = () => {
     let status = LSM.saveToLS(nameField.value, timeInstance.summary);
-    alert(status);
+    alert(status);                                   //
+    recordsTable.innerHTML = `${LSM.showRecords()}`; //чтобы список обновился, если мы сохранили
     nameField.value = ''
 }
 
 //повесить проверку пустоты\полноты LS на любое событие?
 //подвал с "загрузить" должен появиться, только когда в ЛС есть записи
 
-showHideButton.onclick =() => {
-        console.log(LSM.getRecords());
-    recordsTable.classList.remove('hidden');
+showHideButton.onclick =() => { // показать\скрыть должны обновляться при изменении сохранённого - удалении или добавлении
+    recordsTable.classList.toggle('hidden');
     recordsTable.innerHTML = `${LSM.showRecords()}`;
-        console.log(LSM.showRecords())
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     if (LSM.wasViewed() === false){
-        alert("\n Это инструмент для фиксации и подсчёта времени. Жмите на часы для старта отсчёта, для прекращения отсчёта нажмите снова. " +
+        alert("\n Это инструмент для хронометража - фиксации и подсчёта времени. Например, вам интересно, сколько часов в день вы тратите на образование." +
+            "Жмите на часы для старта отсчёта, для прекращения отсчёта нажмите снова. " +
             "Получившиеся интервалы автоматически суммируются. Для сохранения результата введите уникальное название и нажмите Сохранить");
     } else console.log('Старый пользователь');
 });
